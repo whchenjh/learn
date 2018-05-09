@@ -1,0 +1,38 @@
+---
+- hosts: support
+  vars:
+    file_dir: /data/cjh/file/dns
+    conf_file: /data/cjh/file/dns/etc_named.conf
+    forward_zone_file: /data/cjh/file/dns/var_named_cjh.com.zone
+    reverse_zone_file: /data/cjh/file/dns/var_named_192.168.5.zone
+  tasks:
+    - name: "install dns server"
+      yum:
+        name=bind-chroot
+        state=latest
+    - name: "install bind-chroot server"
+      yum:
+        name=bind-chroot
+        state=latest
+    - name: "copy named.conf"
+      copy: 
+        src={{ conf_file }}
+        dest=/etc/named.conf
+        owner=root 
+        group=named 
+    - name: "copy cjh.com.zone"
+      copy: 
+        src={{ forward_zone_file }}
+        dest=/var/named/cjh.com.zone
+        owner=root 
+        group=named
+    - name: "copy 192.168.5.zone"
+      copy: 
+        src={{ reverse_zone_file }}
+        dest=/var/named/192.168.5.zone
+        owner=root 
+        group=named
+    - name: "start dns service"
+      service:
+        name=named
+        state=started
