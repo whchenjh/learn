@@ -1,0 +1,12 @@
+---
+- hosts: support
+  tasks:
+    - name: install svn server
+      yum: name=subversion state=latest
+
+    - name: mkdir
+      shell: mkdir -p /data/svn
+      shell: svnadmin create /data/svn
+    - name: copy svnserve.conf
+      copy: src=/home/cjh/file/svn/svnserve.conf dest=/data/svn/conf/svnserve.conf 
+            owner=root group=root mode=0600

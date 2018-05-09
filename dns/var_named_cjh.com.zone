@@ -1,0 +1,15 @@
+$TTL 1D
+@	IN	SOA	ns.cjh.com	admin.cjh.com. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+	NS	@
+	A	127.0.0.1
+	AAAA	::1
+ns	IN	A	192.168.5.101
+yum	IN	A	192.168.5.101
+zabbix	IN	A	192.168.5.101
+www	IN	A	192.168.5.102
+lnmp	IN	A	192.168.5.101

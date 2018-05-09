@@ -1,0 +1,15 @@
+$TTL 1D
+@	IN SOA	cjh.com admin.cjh.com. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+	NS	@
+	A	127.0.0.1
+	AAAA	::1
+101	IN	PTR	ns.cjh.com.
+101	IN	PTR	yum.cjh.com.
+101	IN	PTR	zabbix.cjh.com.
+102	IN	PTR	www.cjh.com.
+101	IN	PTR	lnmp.cjh.com.

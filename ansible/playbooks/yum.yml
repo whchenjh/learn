@@ -1,0 +1,14 @@
+---
+- hosts: support
+  tasks:
+    - name: install yum server
+      yum:
+        name=createrepo 
+        state=latest
+    - name: make dir
+      shell: 
+#        mkdir /data/yum/
+        createrepo -p -d -o /data/yum/ /data/yum/
+    - name: createrepo --update 
+      shell: 
+        createrepo --update /data/yum/

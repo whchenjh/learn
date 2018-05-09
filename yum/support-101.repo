@@ -1,0 +1,5 @@
+[support-101]
+name=support-101
+baseurl=http://yum.cjh.com/
+gphcheck=0
+priority=1

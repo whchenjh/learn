@@ -1,0 +1,96 @@
+#!/bin/bash
+#
+# /etc/init.d/svn
+#
+# Starts the Subversion Daemon
+#
+# chkconfig: 2345 95 20
+# description: Subversion Daemon
+# processname: svnserve
+# pidfile: /var/lock/subsys/svnserve
+
+source /etc/init.d/functions
+
+[ -x /usr/bin/svnserve ] || exit 1
+
+### Default variables
+SYSCONFIG="/etc/sysconfig/subversion"
+
+### Read configuration
+[ -r "$SYSCONFIG" ] && source "$SYSCONFIG"
+
+RETVAL=0
+prog="svnserve"
+desc="Subversion"
+pidfile="/var/run/$prog.pid"
+
+# 注意将 repo 换成 svn服务器的 目录
+repo="/opt/svn"
+
+start(){
+	echo -n $"Starting ($prog):"
+	daemon $prog -d -r $repo --pid-file $pidfile
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && success || failure 
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
+	echo
+	return $RETVAL 
+}
+
+stop(){
+	echo -n $"Stopping ($prog): " 
+	killproc $prog 
+	RETVAL=$? 
+	[ $RETVAL -eq 0 ] && success || failure 
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$prog 
+	echo
+	return $RETVAL 
+}
+
+restart(){
+	stop
+	start
+}
+
+status() {
+	[ -f "$pidfile" ] && pid=`cat $pidfile`
+	if [ $pid ]; then
+		echo "$prog (pid $pid) is running..."
+	else
+		echo "$prog is stopped"
+	fi
+}
+
+rh_status(){
+	status $prog
+}
+
+###
+case "$1" in
+start)
+	start
+;;
+stop)
+	stop
+;;
+restart)
+	restart
+	RETVAL=$?
+;;
+condrestart)
+	[ -e /var/lock/subsys/$prog ] && restart
+	RETVAL=$?
+;;
+status)
+	rh_status
+;;
+forcestop)
+	forcestop
+;;
+*)
+echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+RETVAL=1
+esac
+
+exit $RETVAL
+

@@ -1,0 +1,19 @@
+---
+- hosts: support
+  tasks:
+    - name: install vsftpd server
+      yum:
+        name=vsftpd 
+        state=latest
+    - name: copy vsftpd.conf
+      copy: 
+        src=/home/cjh/mysvn/vsftpd/vsftpd.conf 
+        dest=/etc/vsftpd/vsftpd.conf
+        owner=root 
+        group=root 
+        mode=600
+    - name: add user cjh
+      user: 
+        name=cjh
+        password=CHENjhftp
+        home=/data/user/cjh
