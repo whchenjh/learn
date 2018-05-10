@@ -92,8 +92,8 @@ Install_Nginx()
 
     mkdir -p ${Default_Website_Dir}
     chmod +w ${Default_Website_Dir}
-    mkdir -p /home/wwwlogs
-    chmod 777 /home/wwwlogs
+    mkdir -p /data/wwwlogs
+    chmod 777 /data/wwwlogs
 
     chown -R www:www ${Default_Website_Dir}
 

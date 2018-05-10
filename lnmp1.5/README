@@ -114,9 +114,9 @@ LNMP相关目录文件
 * PHP：/usr/local/php/
 * 多PHP目录：/usr/local/php5.6/ 版本号随安装版本不同而不同
 * PHP扩展插件配置文件目录：/usr/local/php/conf.d/
-* PHPMyAdmin：/home/wwwroot/default/phpmyadmin/
-* 默认虚拟主机网站目录：/home/wwwroot/default/
-* Nginx日志目录：/home/wwwlogs/
+* PHPMyAdmin：/data/wwwroot/default/phpmyadmin/
+* 默认虚拟主机网站目录：/data/wwwroot/default/
+* Nginx日志目录：/data/wwwlogs/
 
 #配置文件：
 * Nginx主配置文件：/usr/local/nginx/conf/nginx.conf
