@@ -1,0 +1,2 @@
+#定时执行svn备份脚本
+03 03 * * * root /bin/bash /root/svn_backup.sh >>/dev/null 2>&1
